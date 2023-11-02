@@ -6,8 +6,8 @@ from Bot.models.methods import replace_photo_method, check_photo
 from Bot.state_machine.state_machine import *
 
 PATH = os.path.dirname(__file__)  # текущая директория
-TWO_FOLDER_UP = os.path.abspath(os.path.join(PATH, '../../ktep_vk'))  # директория проекта
-CURR_PATH = os.path.join(TWO_FOLDER_UP, 'images')  # директория images
+PROJECT_DIRECTORY = os.path.abspath(os.path.join(PATH, '../'))  # директория проекта
+CURR_PATH = os.path.join(PROJECT_DIRECTORY, 'images')  # директория images
 
 
 def create_or_update_photo(photo_url, user_id):
@@ -19,7 +19,7 @@ def create_or_update_photo(photo_url, user_id):
         filename = f.name  # получаем имя фото
 
     curr_photo = get_state_and_photo(user_id)  # получаем текущее фото
-    after_path = os.path.join(TWO_FOLDER_UP, filename)  # изначально фото хранится в главной директории
+    after_path = os.path.join(PROJECT_DIRECTORY, filename)  # изначально фото хранится в главной директории
     before_path = os.path.join(CURR_PATH, curr_photo['curr_photo'], filename)  # путь, куда будем загружать фото
     folder_path = os.path.dirname(before_path)  # путь к папке с нужным фото
     db_photo_path = os.path.join(curr_photo['curr_photo'], filename)  # получаем полный путь к нужному фото

@@ -1,5 +1,6 @@
 from vk_api.utils import get_random_id
-from bot import vk, upload  # не убирать, прокидывается для дальнейшего использования
+# не убирать, прокидывается для дальнейшего использования
+from main import vk, upload
 
 
 def base_func(user_id, message, keyboard):
@@ -11,4 +12,5 @@ def base_func(user_id, message, keyboard):
 
 def send_photo(user_id, url):
     """Функция отправки фото"""
-    vk.messages.send(user_id=user_id, attachment=url, random_id=get_random_id())
+    vk.messages.send(user_id=user_id, attachment=url,
+                     random_id=get_random_id())

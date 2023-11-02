@@ -5,7 +5,8 @@ from Bot.config_data.config import load_config
 cfg = load_config()  # загружаем конфиг
 
 # подключаемся к redis для хранения состояний
-redis_client = redis.StrictRedis(host=cfg.db.db_host, port=6379, db=0, decode_responses=True)
+redis_client = redis.StrictRedis(
+    host=cfg.state_storage.host, port=cfg.state_storage.port, db=cfg.state_storage.list, decode_responses=True)
 
 # состояния
 MENU = 'menu'

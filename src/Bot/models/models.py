@@ -4,7 +4,7 @@ from Bot.config_data.config import load_config
 cfg = load_config()  # загружаем конфиг
 
 db = MySQLDatabase(database=cfg.db.db_name, user=cfg.db.db_user, password=cfg.db.db_password,
-                   host=cfg.db.db_host)  # подключаемся к бд
+                   host=cfg.db.db_host,port=cfg.db.db_port)  # подключаемся к бд
 
 
 class BaseDataBase(Model):

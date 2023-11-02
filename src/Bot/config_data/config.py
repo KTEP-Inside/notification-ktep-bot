@@ -14,12 +14,21 @@ class DataBaseConfig:
     db_user: str
     db_host: str
     db_password: str
+    db_port: int
+
+
+@dataclass
+class StateStorage:
+    host: str
+    port: int
+    list: int | None = 0
 
 
 @dataclass
 class Config:
     vk_bot: VkBot
     db: DataBaseConfig
+    state_storage: StateStorage
 
 
 def load_config(path: str = None) -> Config:
@@ -30,13 +39,19 @@ def load_config(path: str = None) -> Config:
     cfg = Config(
         vk_bot=VkBot(
             token=env('BOT_TOKEN'),
-            group_id=env('GROUP_ID')
+            group_id=int(env('GROUP_ID'))
         ),
         db=DataBaseConfig(
             db_name=env('DB_NAME'),
             db_host=env('DB_HOST'),
             db_user=env('DB_USER'),
-            db_password=env('DB_PASSWORD')
+            db_password=env('DB_PASSWORD'),
+            db_port=int(env('DB_PORT'))
+        ),
+        state_storage=StateStorage(
+            host=env('STATE_STORAGE_HOST'),
+            port=int(env('STATE_STORAGE_PORT')),
+            list=int(env('STATE_STORAGE_LIST'))
         )
     )
     return cfg
