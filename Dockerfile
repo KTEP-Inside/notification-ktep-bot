@@ -1,4 +1,14 @@
-FROM ubuntu:latest
-LABEL authors="user"
+FROM python:3.11-alpine
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /bot
+
+RUN apk add libpq-dev gcc
+
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY .env .
+
+COPY ./src ./src
+
+CMD ["python", "src/main.py"]
